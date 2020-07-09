@@ -35,6 +35,7 @@ def hour():
 def retweet(Search):
 
 	tweet_list = []
+	#The 'recent' can be change to 'mixed' or to 'popular' to get different result
 	tweet_list = twitter.search(Search, result_type = 'recent', count = 1)
 	try:
 		tweet = tweet_list[0]
