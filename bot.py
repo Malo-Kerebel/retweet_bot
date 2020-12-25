@@ -32,7 +32,7 @@ def hour():
 
 	return hour
 
-def retweet(Search):
+def retweet(Search, Message):
 
 	tweet_list = []
 	#The 'recent' can be change to 'mixed' or to 'popular' to get different result
@@ -43,7 +43,7 @@ def retweet(Search):
 		if (duplicate_check(tweet.id) == False):
 			try:
 				#twitter.retweet(tweet.id) could also works, the code below quote the tweets instead
-				retweet = twitter.update_status("Here is a bit of hug for your TL :)\n\n" + "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str)
+				retweet = twitter.update_status(Message + "\n\n" + "https://twitter.com/" + tweet.user.screen_name + "/status/" + tweet.id_str)
 				log_post(tweet.id, 'https://twitter.com/' + twitter.me().screen_name + '/status/' + retweet.id_str + '/')
 				print("[ OK ] Succesfully retweeted")			
 			except:
@@ -69,7 +69,7 @@ except BaseException as e:
 CACHE_CSV = config['BotSettings']['CacheFile']
 DELAY_BETWEEN_TWEETS = int(config['BotSettings']['DelayBetweenPosts'])
 SEARCH = config['BotSettings']['Search']
-
+MESSAGE = config['BotSettings']['Message']
 
 # Log into Twitter if enabled in settings
 
@@ -140,7 +140,7 @@ while True:
 			cache.close()
 
 	#Main process
-	retweet(SEARCH)
+	retweet(SEARCH, MESSAGE)
 	print(hour() + ' [ OK ] Sleeping for', DELAY_BETWEEN_TWEETS, 'seconds')
 	time.sleep(DELAY_BETWEEN_TWEETS)
 	print('[ OK ] Restarting main process...')
