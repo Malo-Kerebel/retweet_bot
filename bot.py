@@ -42,9 +42,7 @@ def retweet(Search, Message):
     tweet_list = twitter.search(Search, result_type='recent', count=1)
     Search_split = Search.split()
     Search_text = []
-    print(Search_split)
     for i in Search_split:
-        print(i)
         if not "filter" in i:
             Search_text.append(i)
     
@@ -70,6 +68,7 @@ def retweet(Search, Message):
                                                 "\n\n" + "https://twitter.com/"
                                                 + tweet.user.screen_name
                                                 + "/status/" + tweet.id_str)
+                # UNCOMMENT THE 4 NEXT LINES TO LOG POSTS
                 # log_post(tweet.id, 'https://twitter.com/'
                 #                  + twitter.me().screen_name
                 #                  + '/status/'
